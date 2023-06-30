@@ -13,8 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
             "password",
             "is_superuser",
             "is_seller",
-            "address",
-            "cart",
+            # "address",
+            # "cart",
         ]
         extra_kwargs = {
             "username": {
@@ -27,10 +27,15 @@ class UserSerializer(serializers.ModelSerializer):
             },
             "email": {"validators": [UniqueValidator(queryset=User.objects.all())]},
             "password": {"write_only": True},
+            "is_seller": {"required": False},
+            "is_superuser": {"required": False},
+            "address": {"required": False},
+            "cart": {"read_only": True},
         }
 
     def create(self, validated_data: dict) -> User:
-        if validated_data["is_superuser"]:
+        is_superuser = validated_data.get("is_superuser", None)
+        if is_superuser:
             return User.objects.create_superuser(**validated_data)
         else:
             return User.objects.create_user(**validated_data)
