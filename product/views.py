@@ -4,27 +4,24 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticate
 from user.models import User
 from product.models import Product
 from product.serializers import ProductSerializer
-from user.permissions import IsOwnerOrAdmin, IsSellerAndOwnerOrAdmin
+from user.permissions import IsSellerAndOwnerOrAdminOrReadOnly, IsSellerOrAdmin
 
 
 # Create your views here.
 class ProductView(generics.ListCreateAPIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsSellerOrAdmin]
+
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrAdmin]
-
     def perform_create(self, serializer: ProductSerializer) -> Product:
-        user_id = self.request.user.id
-        user = User.objects.get(id=user_id)
-        serializer.save(user=user)
+        serializer.save(user=self.request.user)
 
 
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
-    # sem a parte de verificar se é ou nao um vedendor
-    # permission_classes = [IsAuthenticatedOrReadOnly, IsSellerAndOwnerOrAdmin]
+    permission_classes = [IsSellerAndOwnerOrAdminOrReadOnly]
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
