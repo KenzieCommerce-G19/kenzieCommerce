@@ -17,4 +17,7 @@ class ProductSerializer(serializers.ModelSerializer):
           "user": {"read_only": True},
           "isAvailable":{"default": True}
         }
-        
+    def validate(self, attrs):
+      quantity = attrs.get("quantity")
+      attrs["isAvailable"] = quantity != 0
+      return attrs
