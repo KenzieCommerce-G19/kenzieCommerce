@@ -20,7 +20,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("user.urls")),
     path("api/", include("address.urls")),
+    path("api/", include("product.urls")),
     path("api/", include("cart.urls")),
-    # path("api/", include("product.urls")),
     # path("api/", include("order.urls")),
 ]
