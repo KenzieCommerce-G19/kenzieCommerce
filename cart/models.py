@@ -6,7 +6,4 @@ from user.models import User
 
 
 class Cart(models.Model):
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
-    products = models.ManyToManyField(
-        Product, through="CartItem", related_name="cart_item"
-    )
+    products = models.ManyToManyField(Product, related_name="carts")
