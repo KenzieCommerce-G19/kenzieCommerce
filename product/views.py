@@ -14,7 +14,15 @@ class ProductView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer: ProductSerializer) -> Product:
         serializer.save(user=self.request.user)
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        name = self.request.query_params.get("name")
+        category = self.request.query_params.get("category")
 
+        queryset = queryset.filter(name__icontains=name) if name else queryset
+        queryset = queryset.filter(category=category) if category else queryset
+
+        return queryset
 
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
