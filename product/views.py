@@ -20,7 +20,7 @@ class ProductView(generics.ListCreateAPIView):
         category = self.request.query_params.get("category")
 
         queryset = queryset.filter(name__icontains=name) if name else queryset
-        queryset = queryset.filter(category=category) if category else queryset
+        queryset = queryset.filter(category__icontains=category) if category else queryset
 
         return queryset
 
