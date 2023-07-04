@@ -10,14 +10,14 @@ class ProductSerializer(serializers.ModelSerializer):
           "quantity", 
           "price", 
           "category", 
-          "isAvailable",
+          "is_available",
           "user"
         ]
         extra_kwargs = {
           "user": {"read_only": True},
-          "isAvailable":{"default": True}
+          "is_available":{"default": True}
         }
     def validate(self, attrs):
       quantity = attrs.get("quantity")
-      attrs["isAvailable"] = quantity != 0
+      attrs["is_available"] = quantity != 0
       return attrs
