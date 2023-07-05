@@ -1,3 +1,5 @@
+from address.serializers import AddresseSerializer
+from cart.serializers import CartSerializer
 from .models import User
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -18,15 +20,15 @@ class UserView(generics.CreateAPIView):
             address_data["user"] = user
         else:
             address_data = {
-                "user": user,
+                "user": user.id,
             }
 
-        address_serializer = AddressSerializer(data=address_data)
+        address_serializer = AddresseSerializer(data=address_data)
         address_serializer.is_valid(raise_exception=True)
         address_serializer.save()
 
         cart_data = {
-            "user": user,
+            "user": user.id,
         }
         cart_serializer = CartSerializer(data=cart_data)
         cart_serializer.is_valid(raise_exception=True)

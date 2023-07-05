@@ -11,4 +11,4 @@ class Address(models.Model):
     city = models.CharField(max_length=100, blank=False)
     state = models.CharField(max_length=100, blank=False)
     country = models.CharField(max_length=100, blank=False)
-    zip_code = models.IntegerField(blank=False)
+    zip_code = models.CharField(blank=False)
