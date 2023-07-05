@@ -6,4 +6,4 @@ from user.models import User
 
 
 class Cart(models.Model):
-    products = models.ManyToManyField(Product, related_name="carts")
+    products = models.ManyToManyField(Product, related_name="carts", blank=True)
