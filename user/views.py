@@ -25,14 +25,17 @@ class UserView(generics.CreateAPIView):
 
         address_serializer = AddresseSerializer(data=address_data)
         address_serializer.is_valid(raise_exception=True)
-        address_serializer.save()
+        address = address_serializer.save()
 
         cart_data = {
             "user": user.id,
         }
         cart_serializer = CartSerializer(data=cart_data)
         cart_serializer.is_valid(raise_exception=True)
-        cart_serializer.save()
+        cart = cart_serializer.save()
+
+        user = serializer.save(address=address)
+        user = serializer.save(cart=cart)
 
         return user
 
