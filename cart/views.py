@@ -1,11 +1,13 @@
 from rest_framework import generics
-
 from cart.models import Cart
+
 from cart.serializers import CartSerializer
-from user.permissions import IsOwnerOrAdmin
-from rest_framework.permissions import IsAuthenticated
 
 
-class CartModifaierView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Cart.objects.all()
+class CartModifierView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CartSerializer
+
+    def get_object(self):
+        user = self.request.user
+        cart = Cart.objects.get(user=user)
+        return cart

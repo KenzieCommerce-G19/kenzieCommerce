@@ -4,8 +4,8 @@ from address.models import Address
 
 
 class AddresseSerializer(serializers.ModelSerializer):
-    def create(self, validate_data):
-        return Address.objects.create(**validate_data)
+    def update(self, instance: Address, validated_data: dict):
+        return super().update(instance, validated_data)
 
     class Meta:
         model = Address
@@ -13,7 +13,7 @@ class AddresseSerializer(serializers.ModelSerializer):
             "id",
             "street",
             "number",
-            "districk",
+            "district",
             "city",
             "state",
             "country",
