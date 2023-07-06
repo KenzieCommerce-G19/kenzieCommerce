@@ -47,7 +47,7 @@ THIRD_PARTY_APPS = ["rest_framework", "drf_spectacular"]
 
 MY_APPS = [
     "user",
-    # "order",
+    "order",
     "product",
     "address",
     "cart",
