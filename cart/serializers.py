@@ -6,7 +6,7 @@ from product.serializers import ProductSerializer
 
 
 class CartSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(read_only=True, many=True)
+    products = ProductSerializer(many=True)
 
     class Meta:
         model = Cart
@@ -16,7 +16,7 @@ class CartSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         products_data = validated_data.get("products", [])
         for product_id in products_data:
-            product = Product.objects.get(id=product_id.id)
+            product = Product.objects.get(**product_id)
             instance.products.add(product)
 
         return instance
