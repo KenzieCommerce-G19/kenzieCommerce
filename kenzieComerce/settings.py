@@ -129,7 +129,7 @@ if DATABASE_URL:
 
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-    STATIC_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
     
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
