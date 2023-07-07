@@ -17,7 +17,6 @@ class CartSerializer(serializers.ModelSerializer):
         products_data = validated_data.get("products", [])
         for product_id in products_data:
             product = Product.objects.get(**product_id)
-            print(product)
             instance.products.add(product)
 
         return instance
