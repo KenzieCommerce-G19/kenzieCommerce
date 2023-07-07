@@ -6,7 +6,7 @@ from product.serializers import ProductSerializer
 
 
 class CartSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(many=True)
+    products = ProductSerializer(many=True, required=False)
 
     class Meta:
         model = Cart
