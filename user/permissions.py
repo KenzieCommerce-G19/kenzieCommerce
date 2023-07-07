@@ -17,6 +17,18 @@ class IsSellerAndOwnerOrAdmin(permissions.BasePermission):
         )
 
 
+class IsProductSellerOrAdmin(permissions.BasePermission):
+    def has_object_permission(self, request, view: View, obj) -> bool:
+        return (
+            request.user.is_seller and obj.seller == request.user or request.user.is_superuser
+        )
+
+
+class IsSellerOrAdmin(permissions.BasePermission):
+    def has_permission(self, request, view: View) -> bool:
+        return request.user.is_seller or request.user.is_superuser
+
+
 class IsSellerOrAdminOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view: View) -> bool:
         return request.method in permissions.SAFE_METHODS or request.user.is_seller or request.user.is_superuser

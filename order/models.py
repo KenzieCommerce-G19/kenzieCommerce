@@ -19,6 +19,9 @@ class Order(models.Model):
     user = models.ForeignKey(
         "user.User", on_delete=models.CASCADE, related_name="orders"
     )
+    seller = models.ForeignKey(
+        "user.User", on_delete=models.CASCADE, related_name="seller_orders"
+    )
     products = models.ManyToManyField(
         "product.Product", related_name="order", blank=True
     )
