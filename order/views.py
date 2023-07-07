@@ -20,7 +20,7 @@ class OrderViews(generics.ListCreateAPIView):
         )
 
 
-class OrderDetailsViews(generics.RetrieveUpdateDestroyAPIView):
+class OrderDetailsViews(generics.RetrieveAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsOwnerOrAdmin]
 
@@ -28,5 +28,9 @@ class OrderDetailsViews(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = OrderSerializer
 
 
-class OrderSellerViews(generics.ListCreateAPIView):
+class OrderSellerViews(generics.ListAPIView):
+    permission_classes = [IsSellerAndOwnerOrAdmin]
+
+
+class OrderSellerDetailsViews(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsSellerAndOwnerOrAdmin]
