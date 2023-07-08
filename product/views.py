@@ -6,6 +6,13 @@ from user.permissions import (
     IsSellerAndOwnerOrAdminOrReadOnly,
     IsSellerOrAdminOrReadOnly,
 )
+from rest_framework.pagination import PageNumberPagination
+
+
+class CustomPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = "page_size"
+    max_page_size = 100
 
 
 class ProductView(generics.ListCreateAPIView):
@@ -14,6 +21,9 @@ class ProductView(generics.ListCreateAPIView):
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+    pagination_class = CustomPagination
+    ordering = "id"
 
     def perform_create(self, serializer: ProductSerializer) -> Product:
         serializer.save(user=self.request.user)
