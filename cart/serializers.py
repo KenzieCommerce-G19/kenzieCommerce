@@ -16,9 +16,7 @@ class CartSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         products_data = validated_data.get("products", [])
         for product_id in products_data:
-            products = Product.objects.filter(**product_id)
-            for product in products:
-                instance.products.add(product)
-        return instance
+            products = Product.objects.get(**product_id)
+            instance.products.add(products)
 
         return instance
