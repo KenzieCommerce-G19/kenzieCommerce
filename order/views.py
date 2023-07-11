@@ -16,19 +16,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from product.serializers import ProductSerializer
-
-"""
-loop for no products
-    sellers = []
-    sellers.append(products.user)
-    converter sellers em set para tirar os duplicados
-    converte novamente para array
-    percorrer o sellers e para cada seller
-    percorrer todos os produtos e filtrar pelo valor do seller e fazer o append
-    transformar os arrays em somente um array
-
-
-"""
+from exceptions import isNotAvaliableError
 
 
 class OrderViews(generics.ListCreateAPIView):
@@ -39,41 +27,9 @@ class OrderViews(generics.ListCreateAPIView):
     serializer_class = OrderSerializer
 
     def perform_create(self, serializer):
-        user = get_object_or_404(User, id=self.request.data["user_id"])
-        cart = Cart.objects.get(user=user)
-        seller = User.objects.get(id=3)
-        products = cart.products.all()
-        print("texxxxtooooooo", products)
-        # check quantity
-        for product in products:
-            if product.quantity == 0:
-                raise isNotAvaliableError("product it's not avaliable")
-        # new quantity
-        for product in products:
-            product.quantity = product.quantity - 1
-            product.save()
-            seller = []
-            for product in products:
-                seller.append(product.user)
-
-            no_duplicate_seller = set(seller)
-            seller_list = list(no_duplicate_seller)
-            all_orders = []
-            for seller in seller_list:
-                order_seller_list = []
-                for product in products:
-                    seller_product = products.filter(product.user == seller)
-                    order_seller_list.append(seller_product)
-                all_orders.append(order_seller_list)
-
-            for order in all_orders:
-                order = serializer.save(
-                    user=self.request.user,
-                    seller=seller,
-                )
-                order.products.set(products)
-
-        # serializer.save(products=cart.products, user=self.request.user)
+        serializer.save(
+            user=self.request.user,
+        )
 
 
 class OrderDetailsViews(generics.RetrieveAPIView):
