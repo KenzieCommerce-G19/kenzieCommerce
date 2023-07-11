@@ -2,7 +2,7 @@ from address.serializers import AddresseSerializer
 from cart.serializers import CartSerializer
 from .models import User
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from .serializers import UserSerializer
 from .permissions import IsOwnerOrAdmin
 from rest_framework import generics
