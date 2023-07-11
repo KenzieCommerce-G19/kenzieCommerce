@@ -4,10 +4,9 @@ from product.models import Product
 
 
 class Status(models.TextChoices):
-    REQUEST_MAID = "Request_maid"
     IN_PROGRESS = "In_Progress"
     DELIVERED = "Delivered"
-    DEFAULT = "Not informed"
+    DEFAULT = "Request_maid"
 
 
 class Order(models.Model):
