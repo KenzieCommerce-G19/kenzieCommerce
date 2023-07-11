@@ -13,7 +13,8 @@ from datetime import timedelta
 from pathlib import Path
 import os
 import dotenv
-import dj_database_url
+
+# import dj_database_url
 from django.core.management.utils import get_random_secret_key
 
 
