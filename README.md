@@ -14,7 +14,15 @@
   POSTGRES_DB_NAME=<seu_nome_do_banco>
   POSTGRES_DB_HOST=<seu_host_do_banco>
   POSTGRES_DB_PORT=<sua_porta_do_banco>
-  Substitua <sua_secret_key>, <seu_usuário>, <sua_senha>, <seu_nome_do_banco>, <seu_host_do_banco> e <sua_porta_do_banco> pelos valores apropriados.
+  EMAIL_HOST=smtp.gmail.com 
+  EMAIL_PORT=587 
+  EMAIL_HOST_USER=<seu_email_de_usuário>
+  EMAIL_HOST_PASSWORD=<sua_senha>
+  
+  EMAIL_HOST: Essa é a configuração padrão desta aplicação. Se você desejar usar outro domínio de email, é necessário consultar a documentação específica para obter as configuração corretas.
+  EMAIL_PORT: Senha de aplicativo do email.
+
+  Substitua: <sua_secret_key>, <seu_usuário>, <sua_senha>, <seu_nome_do_banco>, <seu_host_do_banco> e <sua_porta_do_banco> pelos valores apropriados.
 
 ## Passo 2: Configurar o arquivo .env
   Configure o arquivo `.env` adicionando as informações necessárias, conforme mencionado no Passo 1.
