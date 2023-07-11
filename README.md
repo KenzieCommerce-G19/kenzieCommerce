@@ -1,5 +1,7 @@
 # kenzieCommerce
 
+Documentação: https://kenziecommerce-deploy-app.onrender.com/api/docs/swagger-ui/
+
 ## Passo 1: Clonar o repositório do GitHub
   1. Abra o terminal ou prompt de comando no seu computador.
   2. Navegue até o diretório onde deseja clonar o repositório.
